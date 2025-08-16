@@ -563,6 +563,11 @@ require('lazy').setup({
           --  Symbols are things like variables, functions, types, etc.
           map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
 
+          -- Fuzzy find all the function and methods in your current document.
+          map('gF', function()
+            require('telescope.builtin').lsp_document_symbols { symbols = { 'function', 'method' } }
+          end, 'Open Document Functions and Methods')
+
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
           map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
