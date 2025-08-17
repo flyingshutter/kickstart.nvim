@@ -42,32 +42,32 @@ return {
     end),
     vim.keymap.set('n', '<Leader>b', function()
       require('dap').toggle_breakpoint()
-    end),
+    end, { desc = 'Toggle [b]reakpoint' }),
     vim.keymap.set('n', '<Leader>B', function()
       require('dap').set_breakpoint()
-    end),
+    end, { desc = 'Set [B]reakpoint' }),
     vim.keymap.set('n', '<Leader>lp', function()
       require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
-    end),
+    end, { desc = 'Set [L]og [P]oint with message' }),
     vim.keymap.set('n', '<Leader>dr', function()
       require('dap').repl.open()
-    end),
+    end, { desc = '[D]ebug Open [r]epl' }),
     vim.keymap.set('n', '<Leader>dl', function()
       require('dap').run_last()
-    end),
+    end, { desc = '[D]ebug Run [L]ast' }),
     vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
       require('dap.ui.widgets').hover()
-    end),
+    end, { desc = '[D]ebug [H]over' }),
     vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
       require('dap.ui.widgets').preview()
-    end),
+    end, { desc = '[D]ebug [P]review' }),
     vim.keymap.set('n', '<Leader>df', function()
       local widgets = require 'dap.ui.widgets'
       widgets.centered_float(widgets.frames)
-    end),
+    end, { desc = '[D]ebug [F]rames' }),
     vim.keymap.set('n', '<Leader>ds', function()
       local widgets = require 'dap.ui.widgets'
       widgets.centered_float(widgets.scopes)
-    end),
+    end, { desc = '[D]ebug [S]copes' }),
   },
 }
