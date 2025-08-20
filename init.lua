@@ -566,7 +566,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the function and methods in your current document.
           map('gF', function()
-            require('telescope.builtin').lsp_document_symbols { symbols = { 'function', 'method' } }
+            require('telescope.builtin').lsp_document_symbols { symbols = { 'function', 'method', 'class' } }
           end, 'Open Document Functions and Methods')
 
           -- Fuzzy find all the symbols in your current workspace.
