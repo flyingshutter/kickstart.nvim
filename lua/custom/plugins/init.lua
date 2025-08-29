@@ -11,7 +11,7 @@ return {
     {
       'mfussenegger/nvim-dap-python',
       config = function()
-        require('dap-python').setup 'python'
+        require('dap-python').setup 'python' -- AS: windows HAS to differ in this line
         local dap, dapui = require 'dap', require 'dapui'
         dap.listeners.before.attach.dapui_config = function()
           dapui.open()
