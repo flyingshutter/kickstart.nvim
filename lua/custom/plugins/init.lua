@@ -32,7 +32,7 @@ return {
     vim.keymap.set('n', '<F6>', require('dap').step_over, { desc = 'dap step_over' }),
     vim.keymap.set('n', '<F7>', require('dap').step_into, { desc = 'dap step into' }),
     vim.keymap.set('n', '<F8>', require('dap').step_out, { desc = 'dap step out' }),
-    vim.keymap.set('n', '<F9>', require('dap').terminate, { desc = 'dap step out' }),
+    vim.keymap.set('n', '<F9>', require('dap').terminate, { desc = 'dap terminate debug session' }),
     vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint, { desc = 'Toggle [b]reakpoint' }),
     vim.keymap.set('n', '<Leader>B', require('dap').set_breakpoint, { desc = 'Set [B]reakpoint' }),
     vim.keymap.set('n', '<Leader>lp', function()
