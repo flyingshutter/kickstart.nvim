@@ -357,6 +357,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>d', group = '[D]ebug' },
+        { '<leader>a', group = 'H[a]rpoon' },
       },
     },
   },
@@ -1026,6 +1027,8 @@ require('lazy').setup({
     },
   },
 })
+
+require 'custom.alois'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
