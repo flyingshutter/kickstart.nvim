@@ -213,6 +213,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- (AS added)
 vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
 vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
+vim.keymap.set('i', '<C-u>', '<C-x><C-o>', {})
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
