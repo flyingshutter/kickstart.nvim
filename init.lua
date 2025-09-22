@@ -591,7 +591,7 @@ require('lazy').setup({
               sorting_strategy = 'ascending',
               -- winblend = 15,
               layout_config = { prompt_position = 'top' },
-              -- symbols = { 'function', 'method', 'class' },
+              symbols = { 'function', 'method', 'class' },
             }
           end, 'Open Document Functions and Methods')
 
