@@ -48,6 +48,9 @@ return {
       vim.keymap.set('n', '<Leader>dl', require('dap').run_last, { desc = '[D]ebug Run [L]ast' })
 
       -- dapui keymaps
+      vim.keymap.set({ 'n' }, '<Leader>d?', function()
+        require('dapui').eval(nil, { enter = true })
+      end, { desc = '[D]ebug [E]val under cursor' })
       vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover, { desc = '[D]ebug [H]over' })
       vim.keymap.set({ 'n', 'v' }, '<Leader>dp', require('dap.ui.widgets').preview, { desc = '[D]ebug [P]review' })
       vim.keymap.set('n', '<Leader>df', function()
