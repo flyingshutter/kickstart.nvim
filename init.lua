@@ -306,19 +306,20 @@ require('lazy').setup({
           end, { desc = 'Gitsigns previous hunk' })
 
           -- Actions
-          map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[s]tage Hunk' })
-          map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset Hunk' })
 
-          map('v', '<leader>hs', function()
-            gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-          end, { desc = '[s]tage Hunk' })
-
-          map('v', '<leader>hr', function()
-            gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-          end, { desc = '[r]eset Hunk' })
-
-          map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage Buffer' })
-          map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset Buffer' })
+          -- map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[s]tage Hunk' })
+          -- map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset Hunk' })
+          --
+          -- map('v', '<leader>hs', function()
+          --   gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          -- end, { desc = '[s]tage Hunk' })
+          --
+          -- map('v', '<leader>hr', function()
+          --   gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          -- end, { desc = '[r]eset Hunk' })
+          --
+          -- map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage Buffer' })
+          -- map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset Buffer' })
           map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review hunk' })
           map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'preview hunk [i]nline' })
 
