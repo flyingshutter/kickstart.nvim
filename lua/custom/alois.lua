@@ -27,3 +27,39 @@ vim.keymap.set('n', '<leader>ma', function()
     end
   end)
 end, { desc = 'Run a Vim command using vim.ui.input' })
+
+local ls = require 'luasnip'
+local s = ls.snippet
+local i = ls.insert_node
+local t = ls.text_node
+local fmt = require('luasnip.extras.fmt').fmt
+
+ls.add_snippets('all', {
+  s(
+    'ifname',
+    fmt(
+      [[
+    if __name__ == "__main__":
+        main({})
+    ]],
+      {
+        i(1, 'params'),
+      }
+    )
+  ),
+  s(
+    'example2',
+    fmt(
+      [[
+      if {} then
+        {}
+      end
+      ]],
+      {
+        -- i(1) is at nodes[1], i(2) at nodes[2].
+        i(1, 'not now'),
+        i(2, 'when'),
+      }
+    )
+  ),
+})
