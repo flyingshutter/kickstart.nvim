@@ -26,7 +26,7 @@ vim.keymap.set('n', '<leader>ma', function()
       print 'Input cancelled.'
     end
   end)
-end, { desc = 'Run a Vim command using vim.ui.input' })
+end, { desc = 'ASCII Art Text' })
 
 local ls = require 'luasnip'
 local s = ls.snippet
@@ -98,3 +98,5 @@ vim.lsp.config('pyright', {
     end,
   },
 })
+
+vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
