@@ -103,4 +103,11 @@ return {
       -- end)
     end,
   },
+
+  {
+    dir = '~/as/Projekte/2025-09-28_nvim_plugins/astest.nvim',
+    config = function()
+      require('astest').setup()
+    end,
+  },
 }
