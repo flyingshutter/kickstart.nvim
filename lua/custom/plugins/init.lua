@@ -10,7 +10,7 @@ return {
   {
     'mfussenegger/nvim-dap-python',
     config = function()
-      require('dap-python').setup '/usr/bin/python3' -- AS: windows HAS to differ in this line
+      require('dap-python').setup 'python' -- AS: windows HAS to differ in this line
     end,
   },
   {
