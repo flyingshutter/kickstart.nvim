@@ -1,4 +1,6 @@
-print 'loading lua/custom/alois.lua'
+--[[
+some custom stuff and playground
+--]]
 
 vim.keymap.set('n', '<Leader>mr', ':e<CR>', { noremap = true, silent = true, desc = 'Reload current file' })
 -- Enable autoread and set up checking triggers

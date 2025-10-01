@@ -10,7 +10,12 @@ return {
   {
     'mfussenegger/nvim-dap-python',
     config = function()
-      require('dap-python').setup 'python' -- AS: windows HAS to differ in this line
+      local python_interpreter = '/usr/bin/python3'
+      if vim.loop.os_uname().sysname == 'Windows_NT' then
+        print 'Windows operating system detected'
+        python_interpreter = 'python'
+      end
+      require('dap-python').setup(python_interpreter)
     end,
   },
   {
