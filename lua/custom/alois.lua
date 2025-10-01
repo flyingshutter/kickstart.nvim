@@ -1,6 +1,6 @@
 print 'loading lua/custom/alois.lua'
 
-vim.keymap.set('n', '<Leader>r', ':e<CR>', { noremap = true, silent = true, desc = 'Reload current file' })
+vim.keymap.set('n', '<Leader>mr', ':e<CR>', { noremap = true, silent = true, desc = 'Reload current file' })
 -- Enable autoread and set up checking triggers
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
@@ -39,27 +39,10 @@ ls.add_snippets('all', {
     'ifname',
     fmt(
       [[
-    if __name__ == "__main__":
-        main({})
-    ]],
-      {
-        i(1, 'params'),
-      }
-    )
-  ),
-  s(
-    'example2',
-    fmt(
-      [[
-      if {} then
-        {}
-      end
+      if __name__ == "__main__":
+          main({})
       ]],
-      {
-        -- i(1) is at nodes[1], i(2) at nodes[2].
-        i(1, 'not now'),
-        i(2, 'when'),
-      }
+      { i(1, 'params') }
     )
   ),
 })
@@ -99,3 +82,9 @@ vim.lsp.config('pyright', {
   },
 })
 vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
+
+vim.keymap.set('n', '+', 'zO', { desc = 'Open all Folds under cursor' })
+vim.keymap.set('n', '-', 'zC', { desc = 'Close all Folds under cursor' })
+
+vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
+
