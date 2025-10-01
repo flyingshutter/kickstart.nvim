@@ -1052,6 +1052,11 @@ require('lazy').setup({
             local gemini_model = require('gemini.config').config.model.model_id
             local pos = string.find(gemini_model, '-')
             local gemini_model_short = string.sub(gemini_model, pos + 1)
+            local hl_gemini = 'PmenuMatchSel'
+            if not vim.g.gemini_complete_enabled then
+              print("asdahga")
+              hl_gemini = 'DiffDelete'
+            end
 
             return MiniStatusline.combine_groups {
               { hl = mode_hl, strings = { mode } },
@@ -1059,7 +1064,7 @@ require('lazy').setup({
               '%<', -- Mark general truncate point
               { hl = 'MiniStatuslineFilename', strings = { filename } },
               '%=', -- End left alignment
-              { hl = 'Title', strings = { gemini_model_short } },
+              { hl = hl_gemini, strings = { gemini_model_short } },
               { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
               { hl = mode_hl, strings = { search, location } },
             }

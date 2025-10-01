@@ -74,7 +74,10 @@ return {
           print 'Gemini: Autocomplete disabled'
         end
       end
-      vim.keymap.set('n', '<leader>ac', toggle_gemini_autocomplete, { desc = 'Toggle Gemini [a]uto[c]ompletion' })
+      vim.keymap.set('n', '<leader>ac', function()
+        toggle_gemini_autocomplete()
+        vim.api.nvim_command 'redraw!'
+      end, { desc = 'Toggle Gemini [a]uto[c]ompletion' })
     end,
   },
 }
