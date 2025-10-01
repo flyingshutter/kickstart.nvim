@@ -89,3 +89,13 @@ vim.keymap.set('n', '-', 'zC', { desc = 'Close all Folds under cursor' })
 
 vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
 
+-- Have floating windows have a border by default
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or 'rounded'
+
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+vim.keymap.set('n', '<leader>meh', function() vim.lsp.util.open_floating_preview({"Hi World"}) end, { desc = '[e]xample [h]over window' })
