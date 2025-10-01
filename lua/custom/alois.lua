@@ -39,27 +39,10 @@ ls.add_snippets('all', {
     'ifname',
     fmt(
       [[
-    if __name__ == "__main__":
-        main({})
-    ]],
-      {
-        i(1, 'params'),
-      }
-    )
-  ),
-  s(
-    'example2',
-    fmt(
-      [[
-      if {} then
-        {}
-      end
+      if __name__ == "__main__":
+          main({})
       ]],
-      {
-        -- i(1) is at nodes[1], i(2) at nodes[2].
-        i(1, 'not now'),
-        i(2, 'when'),
-      }
+      { i(1, 'params') }
     )
   ),
 })
