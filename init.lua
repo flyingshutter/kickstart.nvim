@@ -171,6 +171,8 @@ vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
+vim.o.foldmethod = 'indent'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 

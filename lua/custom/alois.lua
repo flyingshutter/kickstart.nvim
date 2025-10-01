@@ -81,7 +81,6 @@ vim.lsp.config('pyright', {
     end,
   },
 })
-
 vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
 
 vim.keymap.set('n', '+', 'zO', { desc = 'Open all Folds under cursor' })
