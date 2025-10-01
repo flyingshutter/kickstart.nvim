@@ -100,3 +100,19 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 vim.keymap.set('n', '<leader>meh', function() vim.lsp.util.open_floating_preview({"Hi World"}) end, { desc = '[e]xample [h]over window' })
+
+ -- Create an autocommand group to organize our autocommands
+ vim.api.nvim_create_augroup('FileTypeSettings', { clear = true })
+ -- Create the autocommand
+ vim.api.nvim_create_autocmd('FileType', {
+   group = 'FileTypeSettings',
+   pattern = 'lua', -- The filetype to match
+   callback = function()
+     -- Set options for Lua files here
+     -- 'vim.bo' is used to set buffer-local options
+     vim.bo.tabstop = 2
+     vim.bo.softtabstop = 2
+     vim.bo.shiftwidth = 2
+   end,
+ })
+
