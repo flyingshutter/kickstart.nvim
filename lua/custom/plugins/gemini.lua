@@ -46,7 +46,7 @@ return {
     config = function()
       require('gemini').setup {
 
-        model_config = { model_id = 'gemini-2.0-flash' },
+        model = { model_id = 'gemini-2.0-flash' },
         completion = {
           insert_result_key = '<c-y>',
           can_complete = function()
