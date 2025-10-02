@@ -1054,7 +1054,6 @@ require('lazy').setup({
             local gemini_model_short = string.sub(gemini_model, pos + 1)
             local hl_gemini = 'PmenuMatchSel'
             if not vim.g.gemini_complete_enabled then
-              print("asdahga")
               hl_gemini = 'DiffDelete'
             end
 
