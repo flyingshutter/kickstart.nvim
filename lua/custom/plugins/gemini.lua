@@ -48,13 +48,11 @@ return {
       gemini.setup {
         general = { mini_statusline = true },
         model = { model_id = 'gemini-2.0-flash' },
-        completion = { enabled = false, },
+        completion = { enabled = false },
       }
 
-      vim.keymap.set('n', '<leader>ac', function()
-        gemini.toggle_enabled()
-        vim.api.nvim_command 'redraw!'
-      end, { desc = 'Toggle Gemini [a]uto[c]ompletion' })
+      vim.keymap.set('n', '<leader>ac', gemini.toggle_enabled, { desc = 'Toggle Gemini [a]uto[c]ompletion' })
+      vim.keymap.set('n', '<leader>af', gemini.add_gitfiles, { desc = 'Gemini add Git[f]iles' })
     end,
   },
 }
