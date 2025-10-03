@@ -44,38 +44,15 @@ return {
   {
     dir = '~/as/Projekte/2025-09-28_nvim_plugins/gemini.nvim/',
     config = function()
-      require('gemini').setup {
-
+      local gemini = require 'gemini'
+      gemini.setup {
+        general = { mini_statusline = true },
         model = { model_id = 'gemini-2.0-flash' },
-        completion = {
-          insert_result_key = '<c-y>',
-          can_complete = function()
-            print(
-              'ena: ',
-              vim.g.gemini_complete_enabled,
-              ', pum: ',
-              vim.fn.pumvisible() ~= 1,
-              ',  and: ',
-              vim.g.gemini_complete_enabled and vim.fn.pumvisible() ~= 1
-            )
-
-            return vim.g.gemini_complete_enabled and vim.fn.pumvisible() ~= 1
-          end,
-        },
+        completion = { enabled = false, },
       }
 
-      vim.g.gemini_complete_enabled = false
-
-      local function toggle_gemini_autocomplete()
-        vim.g.gemini_complete_enabled = not vim.g.gemini_complete_enabled
-        if vim.g.gemini_complete_enabled then
-          print 'Gemini: Autocomplete enabled'
-        else
-          print 'Gemini: Autocomplete disabled'
-        end
-      end
       vim.keymap.set('n', '<leader>ac', function()
-        toggle_gemini_autocomplete()
+        gemini.toggle_enabled()
         vim.api.nvim_command 'redraw!'
       end, { desc = 'Toggle Gemini [a]uto[c]ompletion' })
     end,
