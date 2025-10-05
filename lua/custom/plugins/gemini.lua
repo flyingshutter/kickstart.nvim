@@ -47,7 +47,6 @@ return {
       local gemini = require 'gemini'
       gemini.setup {
         general = { mini_statusline = true },
-        model = { model_id = 'gemini-2.0-flash' },
         completion = { enabled = false },
       }
 
