@@ -116,3 +116,49 @@ vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buf
    end,
  })
 
+---------------- a popup window ------------------------------------------------
+--------------------------------------------------------------------------------
+local function open_popup(lines)
+  local function win_config()
+    local width = vim.o.columns - 9
+    local height = vim.o.lines - 9
+    return {
+      relative = 'editor',
+      width = width,
+      height = height,
+      col = math.floor((vim.o.columns - width) / 2),
+      row = math.floor((vim.o.lines - height) / 2),
+      border = 'rounded',
+      title = '── <Esc>: Close ',
+    }
+  end
+
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_open_win(buf, true, win_config())
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.api.nvim_win_set_cursor(0, { #lines, 0 })
+
+  vim.keymap.set('n', '<Esc>', function() vim.api.nvim_win_close(0, false) end, { buffer = buf, desc = 'Abort' })
+end
+
+-- for command output
+local function edit_command_output()
+  local cmd = vim.fn.input('Command to execute: ', '', 'command')
+  if not cmd or cmd == '' then
+    print 'Command cancelled.'
+    return
+  end
+  local output = vim.fn.execute(cmd)
+  local lines = vim.split(output, '\n')
+  open_popup(lines)
+end
+vim.keymap.set('n', '<Leader>mec', edit_command_output, { desc = 'Edit [M]essage Output'})
+
+-- for messages
+local function edit_messages()
+  local output = vim.fn.execute('messages')
+  local lines = vim.split(output, '\n')
+  open_popup(lines)
+end
+vim.keymap.set('n', '<Leader>mem', edit_messages, { desc = 'Edit [C]ommand history' })
+
