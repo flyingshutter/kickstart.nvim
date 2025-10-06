@@ -2,8 +2,26 @@
 some custom stuff and playground
 --]]
 
----------------- use figlet to create ASCII ART TEXT ---------------------------
---------------------------------------------------------------------------------
+---------------- USE DIFFERENT THEMES FOR BG=DARK/LIGHT --------------
+----------------------------------------------------------------------
+vim.api.nvim_create_user_command("DarkMode", function()
+  vim.o.bg = "dark"
+  vim.cmd.colorscheme("kanagawa-dragon")
+  local hl = vim.tbl_deep_extend('force', {}, vim.api.nvim_get_hl(0, {name="Comment"}))
+  hl.italic = nil
+  vim.api.nvim_set_hl(0, "Comment", hl)
+end, { desc = "Switch to dark mode" })
+
+vim.api.nvim_create_user_command("LightMode", function()
+  vim.o.bg = "light"
+   vim.cmd.colorscheme("catppuccin-latte") -- Your chosen light theme
+  local hl = vim.tbl_deep_extend('force', {}, vim.api.nvim_get_hl(0, {name="Comment"}))
+  hl.italic = nil
+  vim.api.nvim_set_hl(0, "Comment", hl)
+end, { desc = "Switch to light mode" })
+
+---------------- USE FIGLET TO CREATE ASCII ART TEXT -----------------
+----------------------------------------------------------------------
 vim.keymap.set('n', '<leader>ma', function()
   vim.ui.input({
     prompt = 'Enter your text: ',
@@ -23,8 +41,8 @@ vim.keymap.set('n', '<leader>ma', function()
   end)
 end, { desc = 'ASCII Art Text' })
 
----------------- some luasnips -------------------------------------------------
---------------------------------------------------------------------------------
+---------------- SOME LUASNIPS ---------------------------------------
+----------------------------------------------------------------------
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
@@ -44,8 +62,8 @@ ls.add_snippets('all', {
   ),
 })
 
----------------- workaround pyright bug ----------------------------------------
---------------------------------------------------------------------------------
+---------------- WORKAROUND PYRIGHT BUG ------------------------------
+----------------------------------------------------------------------
 -- AS as of end of September 2025, pyright causes a bug from neovim version >=0.12,
 -- see https://github.com/neovim/neovim/issues/34731
 -- this is a workaround
@@ -81,8 +99,8 @@ vim.lsp.config('pyright', {
   },
 })
 
----------------- Have floating windows have a border by default-----------------
---------------------------------------------------------------------------------
+---------------- HAVE FLOATING WINDOWS HAVE A BORDER BY DEFAULT-------
+----------------------------------------------------------------------
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -92,15 +110,15 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
----------------- some keymaps --------------------------------------------------
---------------------------------------------------------------------------------
+---------------- SOME KEYMAPS ----------------------------------------
+----------------------------------------------------------------------
 vim.keymap.set('n', '<leader>meh', function() vim.lsp.util.open_floating_preview({"Hi World"}) end, { desc = '[e]xample [h]over window' })
 
 vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
 vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
 
----------------- file specific behaviour ---------------------------------------
---------------------------------------------------------------------------------
+---------------- FILE SPECIFIC BEHAVIOUR -----------------------------
+----------------------------------------------------------------------
  -- Create an autocommand group to organize our autocommands
  vim.api.nvim_create_augroup('FileTypeSettings', { clear = true })
  -- Create the autocommand
@@ -116,9 +134,10 @@ vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buf
    end,
  })
 
----------------- a popup window ------------------------------------------------
---------------------------------------------------------------------------------
+---------------- A POPUP WINDOW --------------------------------------
+----------------------------------------------------------------------
 local function open_popup(lines)
+  lines = lines or {''}
   local function win_config()
     local width = vim.o.columns - 9
     local height = vim.o.lines - 9
@@ -161,4 +180,4 @@ local function edit_messages()
   open_popup(lines)
 end
 vim.keymap.set('n', '<Leader>mem', edit_messages, { desc = 'Edit [C]ommand history' })
-
+vim.keymap.set('n', '<leader>mp', open_popup,  { desc = 'Open [P]opup' })
