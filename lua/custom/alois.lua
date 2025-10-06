@@ -2,15 +2,8 @@
 some custom stuff and playground
 --]]
 
-vim.keymap.set('n', '<Leader>mr', ':e<CR>', { noremap = true, silent = true, desc = 'Reload current file' })
--- Enable autoread and set up checking triggers
-vim.o.autoread = true
-vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
-  command = "if mode() != 'c' | checktime | endif",
-  pattern = '*',
-})
-
--- use figlet to create ASCII ART text
+---------------- use figlet to create ASCII ART TEXT ---------------------------
+--------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>ma', function()
   vim.ui.input({
     prompt = 'Enter your text: ',
@@ -30,6 +23,8 @@ vim.keymap.set('n', '<leader>ma', function()
   end)
 end, { desc = 'ASCII Art Text' })
 
+---------------- some luasnips -------------------------------------------------
+--------------------------------------------------------------------------------
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
@@ -49,6 +44,8 @@ ls.add_snippets('all', {
   ),
 })
 
+---------------- workaround pyright bug ----------------------------------------
+--------------------------------------------------------------------------------
 -- AS as of end of September 2025, pyright causes a bug from neovim version >=0.12,
 -- see https://github.com/neovim/neovim/issues/34731
 -- this is a workaround
@@ -83,14 +80,9 @@ vim.lsp.config('pyright', {
     end,
   },
 })
-vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
 
-vim.keymap.set('n', '+', 'zO', { desc = 'Open all Folds under cursor' })
-vim.keymap.set('n', '-', 'zC', { desc = 'Close all Folds under cursor' })
-
-vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
-
--- Have floating windows have a border by default
+---------------- Have floating windows have a border by default-----------------
+--------------------------------------------------------------------------------
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -99,8 +91,16 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
+
+---------------- some keymaps --------------------------------------------------
+--------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>meh', function() vim.lsp.util.open_floating_preview({"Hi World"}) end, { desc = '[e]xample [h]over window' })
 
+vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
+vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
+
+---------------- file specific behaviour ---------------------------------------
+--------------------------------------------------------------------------------
  -- Create an autocommand group to organize our autocommands
  vim.api.nvim_create_augroup('FileTypeSettings', { clear = true })
  -- Create the autocommand

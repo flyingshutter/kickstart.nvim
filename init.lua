@@ -213,9 +213,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- (AS added)
-vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
-vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
-vim.keymap.set('i', '<C-u>', '<C-x><C-o>', {})
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'AS' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'AS' })
+vim.keymap.set('i', '<C-u>', '<C-x><C-o>', { desc = 'AS' })
+vim.api.nvim_set_keymap('i', '<C-l>', '<Insert>', { desc = 'AS: Toggle overwrite' })
+vim.keymap.set('n', '+', 'zO', { desc = 'AS: Open all Folds under cursor' })
+vim.keymap.set('n', '-', 'zC', { desc = 'AS: Close all Folds under cursor' })
+
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
