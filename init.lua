@@ -220,7 +220,6 @@ vim.api.nvim_set_keymap('i', '<C-l>', '<Insert>', { desc = 'AS: Toggle overwrite
 vim.keymap.set('n', '+', 'zO', { desc = 'AS: Open all Folds under cursor' })
 vim.keymap.set('n', '-', 'zC', { desc = 'AS: Close all Folds under cursor' })
 
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -990,6 +989,11 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
+
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { 'rebelot/kanagawa.nvim', name = 'kanagawa', priority = 1000 },
+  { 'shaunsingh/nord.nvim', name = 'nord', priority = 1000 },
+  { 'marko-cerovac/material.nvim', name = 'material', priority = 1000 },
 
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
