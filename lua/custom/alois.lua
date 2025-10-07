@@ -7,17 +7,11 @@ some custom stuff and playground
 vim.api.nvim_create_user_command("DarkMode", function()
   vim.o.bg = "dark"
   vim.cmd.colorscheme("kanagawa-dragon")
-  local hl = vim.tbl_deep_extend('force', {}, vim.api.nvim_get_hl(0, {name="Comment"}))
-  hl.italic = nil
-  vim.api.nvim_set_hl(0, "Comment", hl)
 end, { desc = "Switch to dark mode" })
 
 vim.api.nvim_create_user_command("LightMode", function()
   vim.o.bg = "light"
    vim.cmd.colorscheme("catppuccin-latte") -- Your chosen light theme
-  local hl = vim.tbl_deep_extend('force', {}, vim.api.nvim_get_hl(0, {name="Comment"}))
-  hl.italic = nil
-  vim.api.nvim_set_hl(0, "Comment", hl)
 end, { desc = "Switch to light mode" })
 
 ---------------- USE FIGLET TO CREATE ASCII ART TEXT -----------------
