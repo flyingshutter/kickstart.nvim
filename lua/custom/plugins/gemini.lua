@@ -15,14 +15,14 @@ return {
       },
     },
     keys = {
-      {
-        '<leader>aa',
-        function()
-          require('sidekick.cli').toggle { focus = true }
-        end,
-        desc = 'Sidekick Toggle CLI',
-        mode = { 'n', 'v' },
-      },
+      -- {
+      --   '<leader>aa',
+      --   function()
+      --     require('sidekick.cli').toggle { focus = true }
+      --   end,
+      --   desc = 'Sidekick Toggle CLI',
+      --   mode = { 'n', 'v' },
+      -- },
       {
         '<leader>ag',
         function()
@@ -48,7 +48,9 @@ return {
       gemini.setup {
         general = { make_statusline = require('gemini-autocomplete.external').make_mini_statusline },
         model = {
-          model_id = require('gemini-autocomplete.api').MODELS.GEMINI_2_5_FLASH_LITE,
+          opts = {
+            model_id = require('gemini-autocomplete.api').MODELS.GEMINI_2_5_FLASH_LITE,
+          }
         },
         -- I like to have it disabled on startup and manually activate when needed (free tier user, quota matters)
         completion = { enabled = false },

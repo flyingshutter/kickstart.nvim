@@ -51,7 +51,7 @@ ls.add_snippets('all', {
       if __name__ == "__main__":
           main({})
       ]],
-      { i(1, 'params') }
+      { i(1, '') }
     )
   ),
 })
@@ -95,14 +95,14 @@ vim.lsp.config('pyright', {
 
 ---------------- HAVE FLOATING WINDOWS HAVE A BORDER BY DEFAULT-------
 ----------------------------------------------------------------------
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or 'rounded'
-
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
+-- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+--
+-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+--   opts = opts or {}
+--   opts.border = opts.border or 'rounded'
+--
+--   return orig_util_open_floating_preview(contents, syntax, opts, ...)
+-- end
 
 ---------------- SOME KEYMAPS ----------------------------------------
 ----------------------------------------------------------------------
@@ -141,7 +141,7 @@ local function open_popup(lines)
       height = height,
       col = math.floor((vim.o.columns - width) / 2),
       row = math.floor((vim.o.lines - height) / 2),
-      border = 'rounded',
+      -- border = 'rounded',
       title = '── <Esc>: Close ',
     }
   end
@@ -152,6 +152,7 @@ local function open_popup(lines)
   vim.api.nvim_win_set_cursor(0, { #lines, 0 })
 
   vim.keymap.set('n', '<Esc>', function() vim.api.nvim_win_close(0, false) end, { buffer = buf, desc = 'Abort' })
+  vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(0, false) end, { buffer = buf, desc = 'Abort' })
 end
 
 -- for command output

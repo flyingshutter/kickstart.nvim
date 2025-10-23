@@ -173,6 +173,8 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.foldmethod = 'indent'
 
+vim.o.winborder = 'rounded'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
