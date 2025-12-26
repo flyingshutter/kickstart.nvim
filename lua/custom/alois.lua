@@ -111,6 +111,9 @@ vim.keymap.set('n', '<leader>meh', function() vim.lsp.util.open_floating_preview
 vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted text' })
 vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
 
+
+-- vim.keymap.set('n', '<leader>me', ':
+vim.api.nvim_set_keymap('n', '<leader>mf', ':Lexplore<CR>:vertical resize 40<CR>', { noremap = true, silent = true })
 ---------------- FILE SPECIFIC BEHAVIOUR -----------------------------
 ----------------------------------------------------------------------
  -- Create an autocommand group to organize our autocommands
