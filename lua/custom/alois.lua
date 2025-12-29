@@ -20,9 +20,10 @@ vim.keymap.set('n', '<leader>ma', function()
   vim.ui.input({
     prompt = 'Enter your text: ',
   }, function(text)
+    local fontdir = vim.loop.os_uname().sysname == 'Windows_NT' and '-d D:\\alois\\as\\bin\\fonts\\' or ''
     if text then -- user_input will be nil if the input was cancelled (e.g., by pressing Esc)
       if text ~= '' then
-        local status, err = pcall(vim.cmd, ':r !figlet ' .. text .. ' | awk \'{sub(/ +$/, ""); print}\'')
+        local status, err = pcall(vim.cmd, ':r !figlet ' .. fontdir .. ' ' .. text .. ' | awk \'{sub(/ +$/, ""); print}\'')
         if not status then
           vim.notify('Error executing command: ' .. err, vim.log.levels.ERROR)
         end
