@@ -113,7 +113,6 @@ vim.keymap.set('v', '<leader>mc', ':norm g_lD0x<CR>', { desc = '[c]leanup pasted
 vim.keymap.set('n', '<leader>ms', ':source %<CR>', { desc = '[s]ource active buffer' })
 
 
--- vim.keymap.set('n', '<leader>me', ':
 vim.api.nvim_set_keymap('n', '<leader>mf', ':Lexplore<CR>:vertical resize 40<CR>', { noremap = true, silent = true })
 ---------------- FILE SPECIFIC BEHAVIOUR -----------------------------
 ----------------------------------------------------------------------
