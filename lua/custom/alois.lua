@@ -180,3 +180,22 @@ local function edit_messages()
 end
 vim.keymap.set('n', '<Leader>mem', edit_messages, { desc = 'Edit [C]ommand history' })
 vim.keymap.set('n', '<leader>mp', open_popup,  { desc = 'Open [P]opup' })
+
+---------------- INCREMENTAL SELECTION -------------------------------
+----------------------------------------------------------------------
+vim.keymap.set('n', '<leader>ii', function()
+  require('nvim-treesitter.incremental_selection').init_selection()
+end, { desc = 'Init TS selection' })
+
+vim.keymap.set('x', '<leader>in', function()
+  require('nvim-treesitter.incremental_selection').node_incremental()
+end, { desc = 'Increment TS selection' })
+
+vim.keymap.set('x', '<leader>iN', function()
+  require('nvim-treesitter.incremental_selection').node_decremental()
+end, { desc = 'Decrement TS selection' })
+
+vim.keymap.set("x", "<leader>is", function()
+  require('nvim-treesitter.incremental_selection').scope_incremental()
+end, { desc = "Increment scope selection" })
+
