@@ -198,3 +198,4 @@ vim.keymap.set("x", "<leader>is", function()
   require('nvim-treesitter.incremental_selection').scope_incremental()
 end, { desc = "Increment scope selection" })
 
+
