@@ -4,7 +4,40 @@
 -- See the kickstart.nvim README for more information
 return {
   'tpope/vim-fugitive',
-  'mfussenegger/nvim-dap',
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+      local dap = require 'dap'
+
+      -- 1. Define the adapter (How Neovim talks to the debugger)
+      dap.adapters.codelldb = {
+        type = 'server',
+        port = '${port}',
+        executable = {
+          -- Change this to the path where mason installed codelldb
+          command = vim.fn.stdpath 'data' .. '/mason/bin/codelldb',
+          args = { '--port', '${port}' },
+        },
+      }
+
+      -- 2. Define the configuration (How to launch your C program)
+      dap.configurations.c = {
+        {
+          name = 'Launch file',
+          type = 'codelldb',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.expand('%:p:r'), 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+        },
+      }
+
+      -- Link C++ to use the same config
+      dap.configurations.cpp = dap.configurations.c
+    end
+  },
   'nvim-neotest/nvim-nio',
   { 'theHamsta/nvim-dap-virtual-text', opts = {} },
   {
