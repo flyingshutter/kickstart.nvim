@@ -2,6 +2,15 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
+
+local mason_cmd = vim.fn.stdpath 'data' .. '/mason/bin/codelldb'
+local python_interpreter = '/usr/bin/python3'
+if is_windows then
+  mason_cmd = "C:\\Users\\alois\\AppData\\Local\\nvim-data\\mason\\packages\\codelldb\\extension\\adapter\\codelldb"
+  python_interpreter = "python"
+end
+
 return {
   'tpope/vim-fugitive',
   {
@@ -14,8 +23,7 @@ return {
         type = 'server',
         port = '${port}',
         executable = {
-          -- Change this to the path where mason installed codelldb
-          command = vim.fn.stdpath 'data' .. '/mason/bin/codelldb',
+          command = mason_cmd,
           args = { '--port', '${port}' },
         },
       }
@@ -30,6 +38,7 @@ return {
             return vim.fn.input('Path to executable: ', vim.fn.expand('%:p:r'), 'file')
           end,
           cwd = '${workspaceFolder}',
+          sourceMap = { ["/e/"] = "E:\\", ["/c/"] = "C:\\", ["/d/"] = "D:\\", },
           stopOnEntry = false,
         },
       }
@@ -43,11 +52,6 @@ return {
   {
     'mfussenegger/nvim-dap-python',
     config = function()
-      local python_interpreter = '/usr/bin/python3'
-      if vim.loop.os_uname().sysname == 'Windows_NT' then
-        print 'Windows operating system detected'
-        python_interpreter = 'python'
-      end
       require('dap-python').setup(python_interpreter)
     end,
   },
