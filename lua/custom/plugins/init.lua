@@ -49,6 +49,7 @@ return {
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
           stopOnEntry = false,
+          console = "integratedTerminal",
         },
       }
 
