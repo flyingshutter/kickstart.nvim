@@ -212,7 +212,7 @@ vim.keymap.set('n', '<leader>dm', function()
     -- If there's an error, print it and don't start the debugger
     print("Build failed:\n" .. result)
   else
-    print("Build successful!")
+    -- print("Build successful!")
     require('dap').continue()
   end
 end, { desc = '[D]ebug: [M]ake and Start' })

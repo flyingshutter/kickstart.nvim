@@ -2,13 +2,17 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+_G.dapui_is_open = false
+local args_str = ""
 local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
 
 local mason_cmd = vim.fn.stdpath 'data' .. '/mason/bin/codelldb'
 local python_interpreter = '/usr/bin/python3'
+local sourceMapList = nil
 if is_windows then
   mason_cmd = "C:\\Users\\alois\\AppData\\Local\\nvim-data\\mason\\packages\\codelldb\\extension\\adapter\\codelldb"
   python_interpreter = "python"
+  sourceMapList = { ["/e/"] = "E:\\", ["/c/"] = "C:\\", ["/d/"] = "D:\\", }
 end
 
 return {
@@ -35,16 +39,23 @@ return {
           type = 'codelldb',
           request = 'launch',
           program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.expand('%:p:r'), 'file')
+            local prog_str = vim.fn.input('Path to executable: ', vim.fn.expand('%:h') .. '/bin/' .. vim.fn.expand('%:r'), 'file')
+            args_str = vim.fn.input('Arguments: ')
+            return prog_str
+          end,
+          args = function()
+            return vim.split(args_str, " +", { trimempty = true })
           end,
           cwd = '${workspaceFolder}',
-          sourceMap = { ["/e/"] = "E:\\", ["/c/"] = "C:\\", ["/d/"] = "D:\\", },
+          sourceMap = sourceMapList,
           stopOnEntry = false,
         },
       }
 
       -- Link C++ to use the same config
       dap.configurations.cpp = dap.configurations.c
+      dap.configurations.cuda = dap.configurations.c
+
     end
   },
   'nvim-neotest/nvim-nio',
@@ -104,6 +115,14 @@ return {
         local widgets = require 'dap.ui.widgets'
         widgets.centered_float(widgets.scopes)
       end, { desc = '[D]ebug [S]copes' })
+      vim.keymap.set('n', '<Leader>du', function()
+        if _G.dapui_is_open then
+          dapui.close()
+        else
+          dapui.open()
+        end
+        _G.dapui_is_open = not _G.dapui_is_open
+      end, { desc = '[D]ebug Toggle [U]I' })
     end,
   },
   {
