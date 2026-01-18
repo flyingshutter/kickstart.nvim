@@ -3,7 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 _G.dapui_is_open = false
-local args_str = ""
+-- local args_str = ""
 local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
 
 local mason_cmd = vim.fn.stdpath 'data' .. '/mason/bin/codelldb'
@@ -40,23 +40,58 @@ return {
           request = 'launch',
           program = function()
             local prog_str = vim.fn.input('Path to executable: ', vim.fn.expand('%:h') .. '/bin/' .. vim.fn.expand('%:r'), 'file')
-            args_str = vim.fn.input('Arguments: ')
             return prog_str
           end,
           args = function()
+            local args_str = vim.fn.input('Arguments: ')
             return vim.split(args_str, " +", { trimempty = true })
           end,
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
           stopOnEntry = false,
-          console = "integratedTerminal",
+        },
+      }
+      -- Link C++ to use the same config
+      dap.configurations.cpp = dap.configurations.c
+
+      dap.adapters.cuda_gdb = {
+        type = "executable",
+        command = "cuda_gdb",
+        args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+      }
+
+      -- 2. Define the configuration (How to launch your C program)
+      dap.configurations.cuda = {
+        {
+          name = 'Launch file',
+          type = 'codelldb',
+          request = 'launch',
+          program = function()
+            local prog_str = vim.fn.input('Path to executable: ', vim.fn.expand('%:h') .. '/bin/' .. vim.fn.expand('%:r'), 'file')
+            -- args_str = vim.fn.input('Arguments: ')
+            return prog_str
+          end,
+          args = function()
+            local args_str = vim.fn.input('Arguments: ')
+            return vim.split(args_str, " +", { trimempty = true })
+          end,
+          cwd = '${workspaceFolder}',
+          sourceMap = sourceMapList,
+          stopOnEntry = false,
         },
       }
 
-      -- Link C++ to use the same config
-      dap.configurations.cpp = dap.configurations.c
-      dap.configurations.cuda = dap.configurations.c
-
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "dap-repl",
+        callback = function()
+          vim.keymap.set('i', '<C-n>', function()
+            require('dap.repl').on_down()
+          end)
+          vim.keymap.set('i', '<C-p>', function()
+            require('dap.repl').on_up()
+          end)
+        end,
+      })
     end
   },
   'nvim-neotest/nvim-nio',
