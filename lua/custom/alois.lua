@@ -202,17 +202,14 @@ end, { desc = "Increment scope selection" })
 ---------------- KEYMAP MAKE AND RUN DEBUG ---------------------------
 ----------------------------------------------------------------------
 vim.keymap.set('n', '<leader>dm', function()
-  -- Get the result of the make command
-  local handle = io.popen('make 2>&1')
-  local result = handle:read('*a')
-  handle:close()
+  vim.notify('Building program, might take a while...', vim.log.levels.INFO)
 
-  print(result)
+  local result = vim.fn.system('make 2>&1')
+
   if result:find("error") then
-    -- If there's an error, print it and don't start the debugger
-    print("Build failed:\n" .. result)
-  else
-    -- print("Build successful!")
-    require('dap').continue()
+    vim.notify('Build failed: ' .. result, vim.log.levels.ERROR)
+    return
   end
+  print(result)
+  require('dap').continue()
 end, { desc = '[D]ebug: [M]ake and Start' })
