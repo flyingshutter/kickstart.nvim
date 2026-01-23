@@ -35,6 +35,15 @@ return {
       -- 2. Define the configuration (How to launch your C program)
       dap.configurations.c = {
         {
+          name = 'bin/...',
+          type = 'codelldb',
+          request = 'launch',
+          program = 'bin/' .. vim.fn.expand('%:r'),
+          cwd = '${workspaceFolder}',
+          sourceMap = sourceMapList,
+          stopOnEntry = false,
+        },
+        {
           name = 'Launch file',
           type = 'codelldb',
           request = 'launch',
@@ -45,6 +54,20 @@ return {
           args = function()
             local args_str = vim.fn.input('Arguments: ')
             return vim.split(args_str, " +", { trimempty = true })
+          end,
+          cwd = '${workspaceFolder}',
+          sourceMap = sourceMapList,
+          stopOnEntry = false,
+          -- initCommands = { "command script import ${workspaceFolder}/debugvis.py" },
+        },
+        {
+          name = 'Exercism',
+          type = 'codelldb',
+          request = 'launch',
+          -- program = './tests.out',
+          program = function ()
+            print(vim.fn.system("make test"))
+            return "./tests.out"
           end,
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
@@ -100,6 +123,15 @@ return {
     'mfussenegger/nvim-dap-python',
     config = function()
       require('dap-python').setup(python_interpreter)
+      -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+      table.insert(require('dap').configurations.python, {
+        type = 'python',
+        request = 'launch',
+        name = 'debug_tools/usercustomize.py',
+        program = '${file}',
+        console = "integratedTerminal",
+        env = {PYTHONPATH = "${workspaceFolder}/debug_tools/:${PYTHONPATH}"},
+      })
     end,
   },
   {
