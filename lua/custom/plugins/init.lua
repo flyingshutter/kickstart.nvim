@@ -6,11 +6,11 @@ _G.dapui_is_open = false
 -- local args_str = ""
 local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
 
-local mason_cmd = vim.fn.stdpath 'data' .. '/mason/bin/codelldb'
+local codelldb_cmd = vim.fn.stdpath 'data' .. '/mason/bin/codelldb'
 local python_interpreter = '/usr/bin/python3'
 local sourceMapList = nil
 if is_windows then
-  mason_cmd = "C:\\Users\\alois\\AppData\\Local\\nvim-data\\mason\\packages\\codelldb\\extension\\adapter\\codelldb"
+  codelldb_cmd = "C:\\Users\\alois\\AppData\\Local\\nvim-data\\mason\\packages\\codelldb\\extension\\adapter\\codelldb"
   python_interpreter = "python"
   sourceMapList = { ["/e/"] = "E:\\", ["/c/"] = "C:\\", ["/d/"] = "D:\\", }
 end
@@ -27,7 +27,7 @@ return {
         type = 'server',
         port = '${port}',
         executable = {
-          command = mason_cmd,
+          command = codelldb_cmd,
           args = { '--port', '${port}' },
         },
       }
@@ -42,6 +42,7 @@ return {
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
           stopOnEntry = false,
+          initCommands = { "command script import " .. vim.fn.expand("$HOME") .. "/as/rechner/importantfiles/dc.py", },
         },
         {
           name = 'Launch file',
@@ -58,7 +59,7 @@ return {
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
           stopOnEntry = false,
-          -- initCommands = { "command script import ${workspaceFolder}/debugvis.py" },
+          initCommands = { "command script import " .. vim.fn.expand("$HOME") .. "/as/rechner/importantfiles/dc.py", },
         },
         {
           name = 'Exercism',
@@ -66,12 +67,13 @@ return {
           request = 'launch',
           -- program = './tests.out',
           program = function ()
-            print(vim.fn.system("make test"))
+            print(vim.fn.system("make"))
             return "./tests.out"
           end,
           cwd = '${workspaceFolder}',
           sourceMap = sourceMapList,
           stopOnEntry = false,
+          initCommands = { "command script import " .. vim.fn.expand("$HOME") .. "/as/rechner/importantfiles/dc.py", },
         },
       }
       -- Link C++ to use the same config
