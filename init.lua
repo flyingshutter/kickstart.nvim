@@ -215,6 +215,11 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- (AS added)
+vim.keymap.set('n', '<C-Right>', '<C-w>>')
+vim.keymap.set('n', '<C-Left>', '<C-w><')
+vim.keymap.set('n', '<C-Up>', '<C-w>+')
+vim.keymap.set('n', '<C-Down>', '<C-w>-')
+
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'AS' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'AS' })
 vim.keymap.set('i', '<C-u>', '<C-x><C-o>', { desc = 'AS' })
