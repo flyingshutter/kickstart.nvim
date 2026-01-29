@@ -1140,6 +1140,7 @@ require('lazy').setup({
 })
 
 require 'custom.scripts.alois'
+require 'custom.scripts.esp8266'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
